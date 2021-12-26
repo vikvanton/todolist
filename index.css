@@ -1,0 +1,127 @@
+html {
+    font-size: 20px;
+}
+
+body {
+    background-color: aliceblue;
+    color: darkslateblue;
+}
+
+#header, #content {
+    background-color: lightsteelblue;
+    border-radius: 15px;
+    width: 50vw;
+    margin: 20px auto;
+    padding: 10px;
+    box-shadow: 5px 5px slategrey;
+    text-align: center;
+}
+
+#input-task {
+    height: 30px;
+    margin: 5px;
+    border-radius: 3px;
+    border-top: 2px solid lightsteelblue;
+    border-right: 2px solid lightsteelblue;
+    border-left: 2px solid lightsteelblue;
+    border-bottom: 2px solid darkslateblue;
+    background-color: lightsteelblue;
+    font-size: 20px;
+    width: 75%;
+    color: darkslateblue;
+}
+
+#input-task:focus {
+    margin: 5px;
+    background-color: aliceblue;
+    outline: none;
+    border: 2px solid darkslateblue;
+    box-shadow: 0 0 2px 2px darkslateblue;
+    color: darkslateblue;
+}
+
+#add-task-button, .delete-btn {
+    border: 2px solid darkslateblue;
+    margin: 5px;
+    padding: 5px;
+    background-color: lightsteelblue;
+    border-radius: 5px;
+    height: 40px;
+    color: darkslateblue;
+    font-size: 20px;
+}
+
+#add-task-button:hover {
+    background-color: aliceblue;
+    border: 2px solid green;
+    color: green;
+}
+
+#add-task-button:active {
+    box-shadow: 0 0 2px 2px green;
+}
+
+.delete-btn:hover {
+    background-color: aliceblue;
+    border: 2px solid darkred;
+    color: darkred;
+}
+
+.delete-btn:active {
+    box-shadow: 0 0 2px 2px darkred;
+}
+
+#inp-box {
+    margin: 5px auto;
+    width: 100%;
+    text-align: justify-all;
+}
+
+#task-list {
+    padding: 0;
+}
+
+li {
+    width: 90%;
+    margin: 20px auto;
+    text-align: left;
+    background-color: aliceblue;
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: 5px 5px slategrey;
+}
+
+ .task-box {
+     margin: 5px;
+     text-align: justify-all;
+ }
+
+ .del-btn-box {
+     text-align: right;
+ }
+
+ .check-box {
+     width: 17px;
+     height: 17px;
+ }
+
+ .done {
+     text-decoration: line-through;
+ }
+
+@media screen and (max-width: 1024px) {
+    html {
+        font-size: 26px;
+    }
+
+    #header, #content {
+        width: 80vw;
+    }
+
+    .check-box {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+
