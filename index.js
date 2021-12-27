@@ -1,36 +1,34 @@
 let taskList = JSON.parse(localStorage.getItem("tasks")) || [];
 
 if (taskList.length !== 0) {
+    let tasksList = document.querySelector("#task-list");
     for (let task of taskList) {
-        let taskElem = createTaskItem(task.name);
+        let taskElem = createTaskElem(task.name);
         if (task.done) {
             taskElem.querySelector("span").classList.add("done");
             taskElem.querySelector("input").checked = true;
         }
+        tasksList.append(taskElem);
     }
 }
 
 document.querySelector("#add-task-button").addEventListener("click", function () {
     let inpFld = document.querySelector("#input-task");
-
     if (inpFld.value !== '') {
-        let taskIndex = taskList.findIndex(task => task.name === inpFld.value);
-        if (taskIndex === -1) {
-            taskList.push({
-                name: inpFld.value,
-                done: false,
-            });
-            createTaskItem(inpFld.value);
+        if (addTaskToList(inpFld.value) === 0) {
+            let tasksList = document.querySelector("#task-list");
+            tasksList.append(createTaskElem(inpFld.value));
             inpFld.value = '';
             updateLocalStorage();
         } else {
-            alert("Такая задача уже добавлена в список!");
+            alert("Задача с таким названием уже добавлена в список!");
         }
+    } else {
+        alert("Введите название задачи! ");
     }
 });
 
-function createTaskItem(taskName) {
-    let tasksList = document.querySelector("#task-list");
+function createTaskElem(taskName) {
     let taskElem = document.createElement("li");
 
     taskElem.innerHTML = `<div class="task-box">
@@ -44,22 +42,42 @@ function createTaskItem(taskName) {
     taskElem.querySelector(".delete-btn").addEventListener("click", function () {
         let listElem = this.parentElement.parentElement;
         let taskBox = this.parentElement.previousElementSibling.firstElementChild.nextElementSibling;
-        let taskIndex = taskList.findIndex(task => task.name === taskBox.textContent);
-        taskList.splice(taskIndex, 1);
-        listElem.remove();
+        delTaskFromList(taskBox.textContent);
         updateLocalStorage();
+        listElem.remove();
     });
 
     taskElem.querySelector(".check-box").addEventListener("click", function () {
-        let taskElem = this.nextElementSibling;
-        taskElem.classList.toggle("done");
-        let task = taskList.find(task => task.name === taskElem.textContent);
-        task.done = !task.done;
+        let taskBox = this.nextElementSibling;
+        taskBox.classList.toggle("done");
+        changeTaskState(taskBox.textContent);
         updateLocalStorage();
     });
 
-    tasksList.append(taskElem);
     return taskElem;
+}
+
+function addTaskToList(taskName) {
+    let taskIndex = taskList.findIndex(task => task.name === taskName);
+    if (taskIndex === -1) {
+        taskList.push({
+            name: taskName,
+            done: false,
+        });
+        return 0;
+    } else {
+        return -1;
+    }
+}
+
+function delTaskFromList(taskName) {
+    let taskIndex = taskList.findIndex(task => task.name === taskName);
+    taskList.splice(taskIndex, 1);
+}
+
+function changeTaskState(taskName) {
+    let task = taskList.find(task => task.name === taskName);
+    task.done = !task.done;
 }
 
 function updateLocalStorage() {
