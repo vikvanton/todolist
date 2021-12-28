@@ -114,6 +114,15 @@ li {
      background-color: lightsteelblue;
  }
 
+ td {
+     vertical-align: top;
+     padding: 5px;
+ }
+
+ span {
+     word-break: break-all;
+ }
+
 @media screen and (max-width: 1024px) {
     html {
         font-size: 30px;

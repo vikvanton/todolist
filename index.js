@@ -31,24 +31,34 @@ document.querySelector("#add-task-button").addEventListener("click", function ()
 function createTaskElem(taskName) {
     let taskElem = document.createElement("li");
 
-    taskElem.innerHTML = `<div class="task-box">
-                                <input class="check-box" type="checkbox">
-                                <span class="task">${taskName}</span>
-                            </div>
-                            <div class="del-btn-box">
-                                <button class="delete-btn">Удалить</button>
-                            </div>`;
+    taskElem.innerHTML = `<table class="task-box">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input class="check-box" type="checkbox">
+                                    </td>
+                                    <td> 
+                                        <span class="task">${taskName}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                           </table> 
+                           <div class="del-btn-box">
+                               <button class="delete-btn">Удалить</button>
+                           </div>`;
 
     taskElem.querySelector(".delete-btn").addEventListener("click", function () {
         let listElem = this.parentElement.parentElement;
-        let taskBox = this.parentElement.previousElementSibling.firstElementChild.nextElementSibling;
+        let taskBox = this.parentElement
+                            .previousElementSibling.firstElementChild.firstElementChild
+                            .firstElementChild.nextElementSibling.firstElementChild;
         delTaskFromList(taskBox.textContent);
         updateLocalStorage();
         listElem.remove();
     });
 
     taskElem.querySelector(".check-box").addEventListener("click", function () {
-        let taskBox = this.nextElementSibling;
+        let taskBox = this.parentElement.nextElementSibling.firstElementChild;
         taskBox.classList.toggle("done");
         changeTaskState(taskBox.textContent);
         updateLocalStorage();
